@@ -7,7 +7,7 @@ type timeNowFunc func() time.Time
 var timeNow timeNowFunc
 
 // SetTimeNow 修改当前时间为指定函数
-// 传入 nil 为重置 TimeNow 函数
+// 传入 nil 重置 TimeNow() 函数
 func SetTimeNow(f timeNowFunc) {
 	timeNow = f
 }
