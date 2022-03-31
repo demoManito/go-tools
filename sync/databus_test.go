@@ -13,7 +13,7 @@ func TestName(t *testing.T) {
 	msg <- 1
 	msg <- 1
 	msg <- 1
-	msg <- 1
+	msg <- 2
 	close(msg)
 	for true {
 		select {
