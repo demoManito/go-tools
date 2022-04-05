@@ -1,4 +1,4 @@
-package sync
+package databus
 
 // DataBusConfig redis config.
 type DataBusConfig struct {
