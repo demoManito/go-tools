@@ -41,7 +41,6 @@ func New(config *Config) *FutureMail {
 		WriteTimeout: time.Second * 1,
 	})
 	futureMail.config.channel = formatChannel(config.DB)
-	// futureMail.subscribe = futureMail.redis.Subscribe(futureMail.ctx, futureMail.config.channel).Channel()
 	return futureMail
 }
 
