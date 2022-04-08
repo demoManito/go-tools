@@ -1,5 +1,5 @@
 # futuremail
-> 基于 redis 的延时消息
+> 基于 redis 延时消息系统
 
 > `redis.conf` 打开：`notify-keyspace-events Ex` 配置
 
