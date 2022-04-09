@@ -71,7 +71,7 @@ func (fm *FutureMail) Close() error {
 	return nil
 }
 
-// ------ 收件箱 - 总部 ------
+// ------ 全局监听器 ------
 
 // SendMail 向 [StartInbox] 中发送
 func (fm *FutureMail) SendMail(key string, delayDuration time.Duration) error {
@@ -127,7 +127,8 @@ func (fm *FutureMail) consume(data string) {
 	}
 }
 
-// ------ 收件箱 - 分部 ------
+// ------ 独立监听器 ------
+// 一个消息绑定一个 channel
 
 // Inbox
 type Inbox struct {

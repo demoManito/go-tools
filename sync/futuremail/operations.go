@@ -10,9 +10,9 @@ import (
 
 // Ack ack
 // isSingle 是否 ack 独立收件箱消息，不传递默认 ack 总收件箱消息
-func (fm *FutureMail) Ack(key string, isSingle ...bool) {
+func (fm *FutureMail) Ack(key string, isEngross ...bool) {
 	var cmd *redis.IntCmd
-	if len(isSingle) != 0 && isSingle[0] == true {
+	if len(isEngross) != 0 && isEngross[0] == true {
 		cmd = fm.redis.SRem(fm.ctx, fm.config.singleQueue, key) // SET
 	} else {
 		cmd = fm.redis.ZRem(fm.ctx, fm.config.poolQueue, key) // ZSET
@@ -23,9 +23,9 @@ func (fm *FutureMail) Ack(key string, isSingle ...bool) {
 }
 
 // backup 添加消息记录
-func (fm *FutureMail) backup(key string, isSingle ...bool) {
+func (fm *FutureMail) backup(key string, isEngross ...bool) {
 	var cmd *redis.IntCmd
-	if len(isSingle) != 0 && isSingle[0] == true {
+	if len(isEngross) != 0 && isEngross[0] == true {
 		cmd = fm.redis.SAdd(fm.ctx, fm.config.singleQueue, key) // SET
 	} else {
 		cmd = fm.redis.ZAdd(fm.ctx, fm.config.poolQueue, &redis.Z{Member: key, Score: 0}) // ZSET

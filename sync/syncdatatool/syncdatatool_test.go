@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"go-tools/slice/iterator"
+	"github.com/demoManito/go-tools/slice/iterator"
 )
 
 func TestSyncdataToolMockData(t *testing.T) {
@@ -23,7 +23,7 @@ func TestSyncdataToolMockData(t *testing.T) {
 		{Name: "user2", Age: 14},
 		{Name: "user3", Age: 16},
 	}
-	iterator, err := iterator.NewIterator(users)
+	iterator, err := iterator.New(users)
 	require.NoError(err)
 	require.NotNil(iterator)
 
