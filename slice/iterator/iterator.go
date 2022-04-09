@@ -16,8 +16,8 @@ type Iterator struct {
 	index int
 }
 
-// NewIterator
-func NewIterator(data interface{}) (*Iterator, error) {
+// New
+func New(data interface{}) (IIterator, error) {
 	d := reflect.ValueOf(data)
 	for d.Kind() == reflect.Interface || d.Kind() == reflect.Ptr {
 		d = d.Elem()

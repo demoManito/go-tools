@@ -24,19 +24,21 @@ func uniq(data interface{}, f uniqFunc) ([]interface{}, error) {
 // Uniq deduplicate and return the deduplicated slice/array/struct
 // params: <data> array to be deduplicated
 // params: <args> tag and tag_name for structs
-// int:
-// [1,1,2,2,3,3] => [1,2,3]
-//
-// string:
-// ["1","1","2","2","3","3"] => ["1","2","3"]
-//
-// struct:
-// type test struct {
-//   A int `json:"a"`
-//   B int `json:"b"`
-// }
-// data=[{A:1, B:1}, {A:2, B:2}, {A:1, B:3}]
-// Uniq(data, "json", "a") => [{A:1, B:1}, {A:1, B:3}]
+/*
+	int:
+	[1,1,2,2,3,3] => [1,2,3]
+
+	string:
+	["1","1","2","2","3","3"] => ["1","2","3"]
+
+	struct:
+	type test struct {
+	  A int `json:"a"`
+	  B int `json:"b"`
+	}
+	data=[{A:1, B:1}, {A:2, B:2}, {A:1, B:3}]
+	Uniq(data, "json", "a") => [{A:1, B:1}, {A:1, B:3}]
+*/
 func Uniq(data interface{}, args ...string) ([]interface{}, error) {
 	return uniq(data, func(v reflect.Value) []interface{} {
 		uniqMap := make(map[interface{}]int)
