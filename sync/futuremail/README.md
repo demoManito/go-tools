@@ -7,7 +7,7 @@
 > `notify.Inbox()` 会启动一个协程监听程序，处理完成消息或超时未处理则会自动关闭改协程，不会产生内存泄漏的风险
 
 ```golang
-    fm := New(&Config{Addr: "127.0.01:6379", DB: 0})
+	fm := New(&Config{Addr: "127.0.01:6379", DB: 0})
 	defer fm.Close()
 
 	// 1. 注册延时消息处理方法
