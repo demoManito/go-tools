@@ -2,33 +2,39 @@ package processsignal
 
 import (
 	"context"
+	"os"
 	"syscall"
 	"testing"
 )
 
-func TestDeathProcessWatch(t *testing.T) {
-	/*
-		example：
-		```go
-			func main() {
-				// business code
-				// ...
-				<-DeathProcessWatch().Signal()
-			}
-		```
+func TestMain(m *testing.M) {
+	os.Exit(0)
+}
 
-	*/
+// kill pid:
+/*
+	1. ps -Cf | grep tools
+	2. find pid
+	3. kill [pid]
+	4. log print terminated
+*/
+// use:
+/*
+	example：
+	```go
+		func main() {
+			// business code
+			// ...
+			<-DeathProcessWatch().Signal()
+		}
+	```
+*/
+func TestDeathProcessWatch(t *testing.T) {
 	<-DeathProcessWatch().Signal()
 	t.Log("kill go test pid success")
 }
 
 func TestDiyProcessWatch(t *testing.T) {
-	/*
-		1. ps -Cf | grep tools
-		2. find pid
-		3. kill [pid]
-		4. log print terminated
-	*/
 	sig := DiyProcessWatch(context.Background(), syscall.SIGTERM)
 	defer sig.Close()
 	for {

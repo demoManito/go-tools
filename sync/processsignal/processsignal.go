@@ -30,7 +30,7 @@ func newPS() *ProcessSignal {
 func DeathProcessWatch() *ProcessSignal {
 	ps := newPS()
 	go func() {
-		sig := make(chan os.Signal)
+		sig := make(chan os.Signal, 1)
 		signal.Notify(sig, os.Interrupt, os.Kill, syscall.SIGTERM)
 		ps.signal <- <-sig
 	}()
@@ -41,7 +41,7 @@ func DeathProcessWatch() *ProcessSignal {
 func DiyProcessWatch(ctx context.Context, sigs ...os.Signal) *ProcessSignal {
 	ps := newPS()
 	go func() {
-		sig := make(chan os.Signal)
+		sig := make(chan os.Signal, 1)
 		signal.Notify(sig, sigs...)
 		for {
 			select {
