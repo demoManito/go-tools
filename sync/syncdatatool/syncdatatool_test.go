@@ -2,7 +2,6 @@ package syncdatatool
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"math/rand"
 	"testing"
@@ -27,7 +26,7 @@ func TestSyncdataToolMockData(t *testing.T) {
 	require.NoError(err)
 	require.NotNil(iterator)
 
-	sync := New(nil, func() (interface{}, bool, error) {
+	sync := New(context.TODO(), func() (interface{}, bool, error) {
 		if iterator.HasNext() {
 			return iterator.Next(), true, nil
 		}
@@ -48,10 +47,7 @@ func TestSyncdataToolMockData(t *testing.T) {
 }
 
 func mockHasMore() bool {
-	if rand.Intn(10) == 8 {
-		return false
-	}
-	return true
+	return rand.Intn(10) == 8
 }
 
 func TestSynchronizationData_Run(t *testing.T) {
@@ -82,7 +78,7 @@ loop1:
 			if !mockHasMore() {
 				return nil, false, nil
 			}
-			return 1, true, errors.New(fmt.Sprintf("测试 %d", count))
+			return 1, true, fmt.Errorf("测试 %d", count)
 		},
 		func(err error) bool {
 			t.Logf("err: %s", err)
