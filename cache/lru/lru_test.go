@@ -6,10 +6,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMain(t *testing.M) {
-	t.Run()
-}
-
 type testLRU struct {
 	val int
 }

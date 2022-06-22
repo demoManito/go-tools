@@ -1,0 +1,36 @@
+name: ci
+on: [push]
+jobs:
+  golint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.46.2
+  gotest:
+    name: test
+    runs-on: ubuntu-latest
+#    strategy: # 策略 (分别测试如下不同版本)
+#      matrix:
+#        go-version: [ 1.15.x, 1.17.x ]
+#        redis-version: [4, 5, 6 ]
+    steps:
+      - name: start redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: 6 # ${{ matrix.redis-version }}
+          redis-port: 6379
+      - name: setup go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: go test
+        run: CGO_ENABLED=0 go test ./...

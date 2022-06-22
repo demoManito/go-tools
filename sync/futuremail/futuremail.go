@@ -18,9 +18,8 @@ type FutureMail struct {
 	retry      chan string
 	deadletter chan string // TODO: 暂无实现
 
-	config      *Config
-	notifies    []NotifyFunc
-	channelSize int
+	config   *Config
+	notifies []NotifyFunc
 }
 
 func New(config *Config) *FutureMail {

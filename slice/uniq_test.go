@@ -26,7 +26,7 @@ func TestUniq(t *testing.T) {
 	require.NoError(err)
 	assert.Empty(arr)
 
-	arr, err = Uniq(1)
+	_, err = Uniq(1)
 	require.EqualError(err, "cannot resolve type")
 
 	// string
@@ -85,7 +85,7 @@ func TestUniqItem(t *testing.T) {
 	require.NoError(err)
 	assert.Empty(arr)
 
-	arr, err = UniqItem(1)
+	_, err = UniqItem(1)
 	require.EqualError(err, "cannot resolve type")
 }
 
@@ -107,6 +107,6 @@ func TestUniqIndex(t *testing.T) {
 	require.NoError(err)
 	assert.Empty(ms)
 
-	ms, err = UniqIndex(1)
+	_, err = UniqIndex(1)
 	require.EqualError(err, "cannot resolve type")
 }

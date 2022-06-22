@@ -2,12 +2,18 @@ package futuremail
 
 import (
 	"errors"
+	"os"
 	"testing"
 	"time"
 )
 
+func TestMain(m *testing.M) {
+	os.Exit(0)
+	// PASS: 需要本地 redis 服务器
+}
+
 func TestFutureMail(t *testing.T) {
-	notify := New(&Config{Addr: "127.0.01:6379", DB: 0})
+	notify := New(&Config{Addr: "127.0.0.1:6379", DB: 0})
 	defer notify.Close()
 
 	// 注册延时消息处理方法
@@ -44,7 +50,7 @@ func TestFutureMail(t *testing.T) {
 }
 
 func TestFutureMail2(t *testing.T) {
-	fm := New(&Config{Addr: "127.0.01:6379", DB: 0})
+	fm := New(&Config{Addr: "127.0.0.1:6379", DB: 0})
 	defer fm.Close()
 
 	// 注册需要监听的延时消息
@@ -85,7 +91,7 @@ func TestFutureMail2(t *testing.T) {
 }
 
 func TestFutureMail3(t *testing.T) {
-	fm := New(&Config{Addr: "127.0.01:6379", DB: 0})
+	fm := New(&Config{Addr: "127.0.0.1:6379", DB: 0})
 	defer fm.Close()
 
 	// NOTICE:  重启后刷新重试 < 3 次消息，这里只会消费 two 的消息
