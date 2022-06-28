@@ -28,3 +28,16 @@ func TestParseClock(t *testing.T) {
 		ParseClock("tt:01:10")
 	})
 }
+
+func TestClock_LessAndGreatert(t *testing.T) {
+	assert := assert.New(t)
+
+	c1 := ParseClock("17:00:00")
+	c2 := ParseClock("22:00:00")
+
+	assert.True(c1.Less(c2))
+	assert.False(c2.Less(c1))
+
+	assert.True(c2.Greater(c1))
+	assert.False(c1.Greater(c2))
+}
