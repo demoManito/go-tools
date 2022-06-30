@@ -20,7 +20,7 @@ const (
 	databusClosed = int32(1)
 )
 
-// DataBus 数据总线
+// DataBus
 type DataBus struct {
 	message chan *Message
 

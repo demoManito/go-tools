@@ -1,0 +1,16 @@
+syntax = "proto3";
+package gotools.sync.databus;
+
+option go_package = "databus";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+/*
+  protoc --gogofaster_out=. databus.proto \
+  -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/gogo/protobuf/protobuf
+ */
+// TODO
+message MessagePB {
+  string key = 1 [(gogoproto.jsontag) = "key"];
+  bytes  value = 2 [(gogoproto.jsontag) = "value", (gogoproto.casttype) = "encoding/json.RawMessage"];
+}

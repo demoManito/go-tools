@@ -10,8 +10,7 @@
 		{Name: "user2", Age: 14},
 		{Name: "user3", Age: 16},
 	}
-	iterator, err := iterator.NewIterator(users)
-	// ... 忽略 err 处理
+	iterator, _ := iterator.NewIterator(users)
 
 	// 1. 创建一个迭代器
 	sync := New(nil, func() (interface{}, bool, error) {
